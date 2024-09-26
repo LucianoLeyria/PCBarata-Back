@@ -10,6 +10,6 @@ try {
 
   await sequelize.authenticate();
   console.log("DB andandooo");
-} catch (e) {
+} catch (error) {
   console.error("Problema en la DB:", error);
 }
