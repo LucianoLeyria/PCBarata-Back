@@ -11,6 +11,8 @@ app.use(express.json());
 
 app.use("/productos/", routerProdDestacados);
 
-app.listen(8000, () => {
-  console.log("Server corriendo en PORT:8000");
+const port = process.env.PORT || 8000;
+
+app.listen(port, () => {
+  console.log(`Server corriendo en port ${port}`);
 });
