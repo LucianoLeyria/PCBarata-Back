@@ -4,6 +4,9 @@ import cors from "cors";
 import morgan from "morgan";
 import "./DB/Sequelize.js";
 import { sequelize } from "./DB/Sequelize.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
@@ -12,7 +15,7 @@ app.use(express.json());
 
 app.use("/productos/", routerProductos);
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 
 app.listen(port, async () => {
   console.log(`Server corriendo en port ${port}`);
