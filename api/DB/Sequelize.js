@@ -13,4 +13,7 @@ export const sequelize = new Sequelize(
   }
 );
 
+await sequelize.authenticate();
+console.log("DB andandooo");
+
 crearTablaProductos(sequelize);
