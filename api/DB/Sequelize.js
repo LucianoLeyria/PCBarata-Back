@@ -1,15 +1,16 @@
 import { Sequelize } from "sequelize";
+import { crearTablaProductos } from "../Modelos/Productos.js";
 
-try {
-  // Option 3: Passing parameters separately (other dialects)
-  const sequelize = new Sequelize("pcbarata", "Lucho", "pcbarata", {
-    host: "127.0.0.1",
+// Option 3: Passing parameters separately (other dialects)
+export const sequelize = new Sequelize(
+  "railway",
+  "root",
+  "dSiNCGbzxCTtJlqXCnPfOTNIaBXcdxaP",
+  {
+    host: "autorack.proxy.rlwy.net",
     dialect: "mysql",
-    port: "3306",
-  });
+    port: "43178",
+  }
+);
 
-  await sequelize.authenticate();
-  console.log("DB andandooo");
-} catch (error) {
-  console.error("Problema en la DB:", error);
-}
+crearTablaProductos(sequelize);
