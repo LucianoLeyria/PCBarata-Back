@@ -18,7 +18,8 @@ export const getProductosDestacados = async (req, res) => {
 
 export const getProductosGenerales = async (req, res) => {
   try {
-    const { categoria, orden, nombre } = req.query;
+    const { categoria, orden, nombre, paginaActual, cantidadPorPag } =
+      req.query;
     const filtros = {};
 
     if (categoria) {
@@ -50,12 +51,29 @@ export const getProductosGenerales = async (req, res) => {
       }
     }
 
+    // Calcula el offset
+    const page = parseInt(paginaActual); // Asegúrate de que sea un número
+    const limit = parseInt(cantidadPorPag); // Valor por defecto si no se proporciona
+    const offset = (page - 1) * limit;
+
+    // Cuenta el total de productos que coinciden con los filtros
+    const totalProductos = await Productos.count({
+      where: filtros,
+    });
+
+    // Obtiene los productos de acuerdo a la paginación
     const productosGenerales = await Productos.findAll({
       where: filtros,
       order: order.length > 0 ? order : undefined,
+      offset: offset,
+      limit: limit,
     });
 
-    res.status(200).json(productosGenerales);
+    // Envia los productos y la información de paginación al frontend
+    res.status(200).json({
+      productos: productosGenerales,
+      totalProductos,
+    });
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
