@@ -20,7 +20,7 @@ const port = process.env.PORT;
 app.listen(port, async () => {
   console.log(`Server corriendo en port ${port}`);
   try {
-    await sequelize.sync({});
+    await sequelize.sync({ force: true });
     console.log("Conexion exitosa");
   } catch (e) {
     console.log("Conexion fallida", e.message);

@@ -26,6 +26,10 @@ export const crearTablaProductos = (sequelize) => {
         defaultValue: false,
         allowNull: true,
       },
+      tienda: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       // Other model options go here
